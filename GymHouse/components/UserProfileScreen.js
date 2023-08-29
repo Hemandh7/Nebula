@@ -11,6 +11,7 @@ const UserProfileScreen = () => {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [contactNumber, setContactNumber] = useState("+91");
 
   const handleSaveProfile = () => {
@@ -68,6 +69,12 @@ const UserProfileScreen = () => {
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
       />
       <TextInput
         style={styles.input}

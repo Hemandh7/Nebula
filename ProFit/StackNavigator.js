@@ -10,6 +10,9 @@ import SectionScreen from "./screens/SectionScreen";
 import NutritionScreen from "./screens/NutritionScreen";
 import NutritionCard from "./components/NutritionCards";
 import UserProfileScreen from "./screens/UserProfileScreen";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import DietScreen from "./screens/DietScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -17,7 +20,9 @@ const StackNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen name="User" component={UserProfileScreen} options={{ headerShown: false }} />
+      {/* <Stack.Screen name="User" component={UserProfileScreen} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+      <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
       <Stack.Screen name="Section" component={SectionScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Workout" component={WorkoutScreen} options={{headerShown:false}}/>
@@ -25,6 +30,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Rest" component={RestScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Nutrition" component={NutritionScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Single" component={NutritionCard} options={{ headerShown: false }} />
+        <Stack.Screen name="Diet" component={DietScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

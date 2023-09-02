@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable, Image } from "react-native";
+import { StyleSheet, Text, View, Pressable, Image,ScrollView } from "react-native";
 import React from "react";
 import fitness from "../data/fitness";
 import { MaterialCommunityIcons } from "@expo/vector-icons";

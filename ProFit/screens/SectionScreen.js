@@ -7,6 +7,8 @@ const SectionScreen = ({ navigation }) => {
       navigation.navigate("Home");
     } else if (option === "nutrition") {
       navigation.navigate("Nutrition");
+    }else if (option === "diet") {
+      navigation.navigate("Diet");
     }
   };
 
@@ -21,6 +23,10 @@ const SectionScreen = ({ navigation }) => {
         <Pressable onPress={() => handleSelectOption("nutrition")} style={styles.card}>
           <Image source={require("../assets/nutrition.jpg")} style={styles.image} />
           <Text style={styles.cardText}>Nutrition</Text>
+        </Pressable>
+        <Pressable onPress={() => handleSelectOption("diet")} style={styles.card}>
+          <Image source={require("../assets/nutrition.jpg")} style={styles.image} />
+          <Text style={styles.cardText}>Diet</Text>
         </Pressable>
       </View>
     </View>
@@ -39,9 +45,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   cardContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
+    
   },
   card: {
+    
     margin: 10,
     padding: 20,
     backgroundColor: "#f0f0f0",
@@ -49,8 +57,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: 120,
-    height: 120,
+    
+    width: 200,
+    height: 200,
     marginBottom: 10,
   },
   cardText: {

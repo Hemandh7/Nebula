@@ -18,7 +18,7 @@ const HomeScreen = () => {
 
   const navigation = useNavigation();
   return (
-    <ScrollView style={{marginTop:40}}>
+    <SafeAreaView style={{marginTop:40}}>
       <Ionicons
           onPress={() => navigation.goBack()}
           style={{ position: "absolute", top: 50, left: 50 }}
@@ -97,7 +97,7 @@ const HomeScreen = () => {
           </View>
         </View>
 
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
+        {/* <View style={{ justifyContent: "center", alignItems: "center" }}>
           <Image
             style={{
               width: "95%",
@@ -110,10 +110,10 @@ const HomeScreen = () => {
               uri: "https://t3.ftcdn.net/jpg/00/90/21/22/360_F_90212267_soThMAr7ZpdkWSN4fjoW6wLR6zDjc4kK.jpg",
             }}
           />
-        </View>
+        </View> */}
         <FitnessCards  />
       </View>
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 

@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image,ScrollView } from 'react-native';
 import { Picker } from "@react-native-picker/picker";
+import { useNavigation } from '@react-navigation/native'; // Import navigation hook
 import workoutAndDietPlans from '../data/diet'; // Import the data
 
 const DietScreen = () => {
   const [selectedWorkoutPlan, setSelectedWorkoutPlan] = useState(0);
+  const navigation = useNavigation(); // Initialize navigation
 
   const handleWorkoutPlanChange = (value) => {
     setSelectedWorkoutPlan(value);
   };
 
-  const dietPlan = workoutAndDietPlans[selectedWorkoutPlan];
+  const dietPlans = workoutAndDietPlans[selectedWorkoutPlan].dietPlans;
+
+  const handleSeeMorePress = (dietPlanName) => {
+    // Navigate to DietPlanDetailsScreen with the selected diet plan name
+    navigation.navigate('DietDetails', { dietPlanName });
+  };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.heading}>Choose a Workout Plan</Text>
       <Picker
         selectedValue={selectedWorkoutPlan}
@@ -25,16 +32,25 @@ const DietScreen = () => {
         ))}
       </Picker>
 
-      {dietPlan && (
-        <View style={styles.dietPlanCard}>
-          <Text style={styles.cardHeading}>{dietPlan.workoutPlan}</Text>
-          <Text style={styles.cardDetails}>{`Details: ${dietPlan.minimalDetails}`}</Text>
-          <TouchableOpacity style={styles.showMoreButton}>
-            <Text style={styles.buttonText}>Show More</Text>
-          </TouchableOpacity>
+      {dietPlans && Object.keys(dietPlans).map((dietPlanName, index) => (
+        <View key={index} style={styles.dietPlanCard}>
+          <View style={styles.cardHeader}>
+            <Text style={styles.cardHeading}>{dietPlanName}</Text>
+            <Image
+              style={styles.logoImage}
+              source={{ uri: 'https://www.family.abbott/content/dam/an/familyabbott/my-en/pediasure/tools-and-resources/resources/others/meal-plan/masthead.png' }}
+            />
+          </View>
+          <Text style={styles.cardText}>Follow this plan strictly for results</Text>
+          <Pressable
+            style={styles.showMoreButton}
+            onPress={() => handleSeeMorePress(dietPlanName)} // Pass diet plan name
+          >
+            <Text style={styles.buttonText}>See More</Text>
+          </Pressable>
         </View>
-      )}
-    </View>
+      ))}
+    </ScrollView>
   );
 };
 
@@ -45,10 +61,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   heading: {
-    fontSize: 24,
-    marginBottom: 16,
+    fontSize: 28,
+    marginBottom: 20,
     fontWeight: 'bold',
     color: '#333',
+    textAlign: 'center',
   },
   picker: {
     backgroundColor: 'white',
@@ -57,26 +74,36 @@ const styles = StyleSheet.create({
   dietPlanCard: {
     borderWidth: 1,
     borderColor: 'gray',
-    padding: 16,
-    marginBottom: 16,
+    marginBottom: 20,
     borderRadius: 8,
     backgroundColor: 'white',
   },
+  cardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+  },
   cardHeading: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 8,
     color: '#333',
   },
-  cardDetails: {
+  logoImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 20, // Makes it a rounded image
+  },
+  cardText: {
+    padding: 16,
     color: '#666',
   },
   showMoreButton: {
-    marginTop: 16,
-    alignItems: 'center',
     backgroundColor: '#007BFF',
+    alignItems: 'center',
     padding: 10,
-    borderRadius: 8,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
   },
   buttonText: {
     color: 'white',

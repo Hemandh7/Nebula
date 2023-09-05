@@ -1,6 +1,6 @@
 // Signup.js
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet,ScrollView } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet,ScrollView,Image} from 'react-native';
 import { addUser, getUserByEmail } from '../data/userdata';
 import { Picker } from '@react-native-picker/picker';
 
@@ -51,6 +51,10 @@ const Signup = ({ navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <Image
+        source={require('../assets/logo2.png')} 
+        style={styles.logo}
+      />
       <Text style={styles.heading}>Signup</Text>
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <View style={styles.inputContainer}>
@@ -140,6 +144,12 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 24,
+    marginBottom: 20,
+  },
+  logo: {
+    width: 100, 
+    height: 100, 
+    borderRadius: 50, 
     marginBottom: 20,
   },
   inputContainer: {

@@ -1,43 +1,80 @@
-// Login.js
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
-import { getUserByEmail } from '../data/userdata';
+import { View,Image, Text, TextInput, Pressable, StyleSheet, SafeAreaView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
-const Login = ({ navigation }) => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  
+  // Use useNavigation hook to get the navigation object
+  const navigation = useNavigation();
 
-  const handleLogin = () => {
-    setError(''); // Reset any previous errors
-    setEmail('');
-    setPassword('');
-
+  const handleLogin = async() => {
+    setError('');
+    
     if (!email || !password) {
       setError('Please fill in all fields.');
       return;
     }
 
-    const user = getUserByEmail(email);
-
-    if (user && user.password === password) {
-      // Successfully logged in
-      // Navigate to the SectionPage
-      navigation.navigate('Section');
-
-      // You can add additional actions here if needed
-      alert('Logged in successfully!');
-    } else {
-      setError('Invalid email or password');
-    }
+    
+    await fetch('api', {
+      method: 'POST',
+      headers: {
+        // Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password
+      }),
+    })
+    .then((res) =>{
+      return res.json();
+    })
+    .then(async (data) => {
+      const {message} = data;
+      alert(message);
+      await AsyncStorage.setItem("loggedUID", data.account.id)
+      await AsyncStorage.setItem("loggedRole", data.role)
+      await AsyncStorage.setItem("loggedEmail", data.account.email)
+      await AsyncStorage.setItem("loggedName", data.account.name)
+      
+      if (data.role === 'trainer') {
+        navigation.navigate('Trainer'); // Replace with your actual trainer dashboard screen
+      }
+      else if (data.role === 'user') {
+        navigation.navigate('Section');
+      }
+    })
+    .catch((err) => alert(err));
   };
+
+  const toUserReg = () => {
+    navigation.navigate("User")
+  }
+
+  
+  const toTrainerReg = () => {
+    navigation.navigate("TrainerRegistration")
+  }
 
   const handleSkip = () => {
-    navigation.navigate("Section"); // Navigate to the section screen
+    navigation.navigate("Section"); 
   };
 
+  const handletrainer=() => {
+    navigation.navigate("Trainer");
+  }
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+       <Image
+        source={require('../assets/logo2.png')} 
+        style={styles.logo}
+      />
       <Text style={styles.heading}>Login</Text>
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
       <View style={styles.inputContainer}>
@@ -59,6 +96,7 @@ const Login = ({ navigation }) => {
           style={styles.input}
         />
       </View>
+
       <Pressable
         style={({ pressed }) => [
           styles.loginButton,
@@ -68,24 +106,44 @@ const Login = ({ navigation }) => {
       >
         <Text style={styles.loginButtonText}>Login</Text>
       </Pressable>
+
       <Text
         style={styles.signupText}
-        onPress={() => navigation.navigate('Signup')}
+        onPress={toUserReg}
       >
-        Don't have an account? Sign Up
+        New User Registration!
       </Text>
+
+      <Text
+        style={styles.signupText}
+        onPress={toTrainerReg}
+      >
+        New Trainer Registration!
+      </Text>
+
       <Pressable  onPress={handleSkip}>
         <Text style={styles.skipButtonText}>Continue as Guest</Text>
       </Pressable>
-    </View>
+      <Pressable  onPress={handletrainer}>
+        <Text style={styles.skipButtonText}>Continue as Trainer</Text>
+      </Pressable>
+    </SafeAreaView>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  logo: {
+    width: 100, 
+    height: 100, 
+    borderRadius: 50, 
+    marginBottom: 20,
   },
   heading: {
     fontSize: 24,
@@ -129,6 +187,12 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 10,
   },
+  skipButtonText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: 'green',
+    textDecorationLine: 'underline',
+  },
 });
 
-export default Login;
+export default Login;

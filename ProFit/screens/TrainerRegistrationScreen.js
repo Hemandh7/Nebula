@@ -5,47 +5,49 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native"; 
 import { Picker } from "@react-native-picker/picker";
 
-const UserProfileScreen = () => {
+const TrainerRegistrationScreen = () => {
   const navigation = useNavigation();
 
   const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState(""); 
-  const [height, setHeight] = useState("");
-  const [weight, setWeight] = useState("");
+  const [gender, setGender] = useState("");
+  const [specialization, setSpecialization] = useState(""); 
+  const [experience, setExperience] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [contactNumber, setContactNumber] = useState("+91");
+  const [contactNumber, setContactNumber] = useState("");
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
   const handleSaveProfile = async () => {
-    if (!name || !age || !gender || !height || !weight || !email || !password || !contactNumber) {
+    // Perform validation
+    if (!name || !specialization || !gender || !experience || !email || !password || !contactNumber) {
       alert("All fields are required");
+      console.log();
       return;
     }
+
     if (!/^\S+@\S+\.\S+$/.test(email)) {
       alert("Invalid email format");
       return;
     }
-    const userProfile = {
+
+    const trainerProfile = {
       name,
-      age,
       gender,
-      height,
-      weight,
+      specialization,
+      experience,
       email,
       contact_number: contactNumber,
       password
     };
-    await fetch('api', {
+    await fetch('http://127.0.0.1:8000/trainer/signup/', {
           method: 'POST',
           headers: {
             // Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(userProfile),
+          body: JSON.stringify(trainerProfile),
         })
         .then((res) =>{
           return res.json();
@@ -53,18 +55,20 @@ const UserProfileScreen = () => {
         .then(async (data) => {
           const {message} = data;
           alert(message);
-          gotoLogin();
+          handleRedirect();
         })
         .catch((err) => alert(err));
+    
   };
 
-  const gotoLogin = () => {
-    navigation.navigate("Login"); // Navigate to the section screen
+  const handleRedirect = () => {
+    navigation.navigate("Login"); // Navigate to the login screen
   };
+
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>User Registration</Text>
+      <Text style={styles.text}>Trainer Registration</Text>
       <TextInput
         style={styles.input}
         placeholder="Name"
@@ -74,9 +78,17 @@ const UserProfileScreen = () => {
       />
       <TextInput
         style={styles.input}
-        placeholder="Age"
-        value={age}
-        onChangeText={setAge}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        required={true} // Add required attribute
+      />
+      {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
+      <TextInput
+        style={styles.input}
+        placeholder="Specialization"
+        value={specialization}
+        onChangeText={setSpecialization}
         required={true} // Add required attribute
       />
       <Picker
@@ -92,24 +104,18 @@ const UserProfileScreen = () => {
       </Picker>
       <TextInput
         style={styles.input}
-        placeholder="Height"
-        value={height}
-        onChangeText={setHeight}
+        placeholder="Experience in years"
+        value={experience}
+        onChangeText={setExperience}
       />
       <TextInput
         style={styles.input}
-        placeholder="Weight"
-        value={weight}
-        onChangeText={setWeight}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
+        placeholder="Contact Number"
+        value={contactNumber}
+        onChangeText={setContactNumber}
         required={true} // Add required attribute
       />
-      {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
+      
       <TextInput
         style={styles.input}
         placeholder="Password"
@@ -124,7 +130,7 @@ const UserProfileScreen = () => {
         <Text style={styles.buttontext}>Register</Text>
       </Pressable>
 
-      <Pressable style={styles.skipButton} onPress={gotoLogin}>
+      <Pressable style={styles.skipButton} onPress={handleRedirect}>
         <Text style={styles.skipButtonText}>Got to Login!</Text>
       </Pressable>
 
@@ -132,4 +138,4 @@ const UserProfileScreen = () => {
   );
 };
 
-export default UserProfileScreen;
+export default TrainerRegistrationScreen;

@@ -26,7 +26,7 @@ const RestScreen = () => {
       <Image
         resizeMode="contain"
         source={{
-          uri: "https://previews.123rf.com/images/leonhartrizal/leonhartrizal1412/leonhartrizal141200007/34916614-man-take-a-break-after-exercise.jpg",
+          uri: "https://i.gifer.com/7kvp.gif",
         }}
         style={{ width: "100%", height: 420 }}
       />

@@ -58,11 +58,11 @@ const nutritionData=[
   {
     "name": "Arm Beginner Workout",
     "image": "https://musclemaker.com.au/wp-content/uploads/2020/03/training-arms-for-the-strength-athlete-header-830x467-1.jpg",
-    "goal": "Muscle Gain", // Replace with the actual goal for this plan
-    "duration": 8, // Replace with the actual duration in weeks
-    "guideline": "Follow this nutrition plan for better arm muscle development.", // Replace with actual guidelines
-    "trainerId": "1", // Replace with the actual trainer ID from async storage
-    "workoutPlanId": "101", // Replace with the actual workout plan ID from async storage
+    "goal": "Muscle Gain", 
+    "duration": 8, 
+    "guideline": "Follow this nutrition plan for better arm muscle development.", 
+    "trainerId": "1", 
+    "workoutPlanId": "101", 
     "foodItems": [
       {
         "name": "Eggs",
@@ -114,11 +114,11 @@ const nutritionData=[
   {
     "name": "Abs Beginner Workout",
     "image": "https://leanbodyuk.com/wp-content/uploads/2021/02/Six-%E2%80%93-Pack-Abs-The-Beginners-Guide.jpg",
-    "goal": "Balanced Diet", // Replace with the actual goal for this plan
-    "duration": 10, // Replace with the actual duration in weeks
-    "guideline": "Follow this nutrition plan for better abs.", // Replace with actual guidelines
-    "trainerId": "1", // Replace with the actual trainer ID from async storage
-    "workoutPlanId": "789", // Replace with the actual workout plan ID from async storage
+    "goal": "Balanced Diet", 
+    "duration": 10, 
+    "guideline": "Follow this nutrition plan for better abs.", 
+    "trainerId": "1", 
+    "workoutPlanId": "789", 
     "foodItems": [
       {
         "name": "Avocado",
@@ -170,11 +170,11 @@ const nutritionData=[
   {
     "name": "Chest Beginner Workout",
     "image": "https://www.healthkart.com/connect/wp-content/uploads/2016/03/banner-7.jpg",
-    "goal": "Muscle Gain", // Replace with the actual goal for this plan
-    "duration": 10, // Replace with the actual duration in weeks
-    "guideline": "Follow this nutrition plan for better chest muscle development.", // Replace with actual guidelines
-    "trainerId": "1", // Replace with the actual trainer ID from async storage
-    "workoutPlanId": "234", // Replace with the actual workout plan ID from async storage
+    "goal": "Muscle Gain", 
+    "duration": 10, 
+    "guideline": "Follow this nutrition plan for better chest muscle development.", 
+    "trainerId": "1", 
+    "workoutPlanId": "234", 
     "foodItems": [
       {
         "name": "Brown Rice",

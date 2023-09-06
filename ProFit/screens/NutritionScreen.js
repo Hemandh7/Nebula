@@ -1,14 +1,28 @@
-import React from "react";
-import { View, StyleSheet, Pressable, Image, Text,ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, Pressable, Image, Text, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import nutritionData from "../data/nutrition"; 
 import { Ionicons } from "@expo/vector-icons";
+import axios from "axios";
 
 const NutritionScreen = () => {
   const navigation = useNavigation();
+  const [nutritionData, setNutritionData] = useState([]);
+
+  useEffect(() => {
+    // Make an Axios GET request to fetch nutrition data from your API or server
+    axios.get("https://fitgym-backend.onrender.com/all/nutritionplans/")
+      .then((response) => {
+        // Assuming the response data is an array of nutrition objects
+        setNutritionData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching nutrition data:", error);
+      });
+  }, []);
 
   const handleSectionPress = (exercise) => {
-    navigation.navigate("Single", { nutritionItems: exercise.nutritionItems });
+    // Pass the selected ID to the Single screen
+    navigation.navigate("Single", { selectedId: exercise.id });
   };
 
   return (
@@ -28,7 +42,7 @@ const NutritionScreen = () => {
           onPress={() => handleSectionPress(exercise)}
         >
           <Image source={{ uri: exercise.image }} style={styles.exerciseImage} />
-          <Text style={styles.exerciseName}>{exercise.exerciseName}</Text>
+          <Text style={styles.exerciseName}>{exercise.name}</Text>
         </Pressable>
       ))}
     </ScrollView>

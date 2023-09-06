@@ -13,6 +13,8 @@ const SectionScreen = ({ navigation }) => {
       navigation.navigate("GoalList");
     }else if (option === "activity") {
       navigation.navigate("Activity");
+    }else if (option === "logout") {
+      navigation.navigate("Logout");
     }
   };
 
@@ -54,6 +56,12 @@ const SectionScreen = ({ navigation }) => {
     <View style={styles.cardContent}>
     <Text style={styles.cardText}>Activity Log</Text>
       <Image source={require("../assets/logo-200.png")} style={styles.image} />
+      </View>
+  </Pressable>
+  <Pressable onPress={() => handleSelectOption("logout")} style={styles.card}>
+    <View style={styles.cardContent}>
+    <Text style={styles.cardText}>Logout</Text>
+      <Image source={require("../assets/logout.png")} style={styles.image} />
       </View>
   </Pressable>
   
@@ -102,7 +110,7 @@ const styles = StyleSheet.create({
     borderRadius: 60, // Makes it a rounded image
   },
   cardText: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: "bold",
   },
   logo: {

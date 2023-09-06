@@ -1,21 +1,44 @@
-import { StyleSheet, Text, View, Pressable, Image,ScrollView } from "react-native";
-import React from "react";
-import fitness from "../data/fitness";
+import { StyleSheet, Text, View, Pressable, Image, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const FitnessCards = () => {
-  const FitnessData = fitness;
+  const [fitnessData, setFitnessData] = useState([]);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    // Make an Axios GET request to fetch fitness data from your API or server
+    axios.get("https://fitgym-backend.onrender.com/all/workoutplans/")
+      .then((response) => {
+        // Assuming the response data is an array of fitness objects
+        setFitnessData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching fitness data:", error);
+      });
+  }, []); // The empty dependency array ensures this effect runs once when the component mounts
+
+  const storeSelectedFitnessId = async (id) => {
+    try {
+      await AsyncStorage.setItem('selectedFitnessId', id.toString());
+    } catch (error) {
+      console.error("Error storing selected fitness ID:", error);
+    }
+  };
+
   return (
     <View>
-      {FitnessData.map((item, key) => (
+      {fitnessData.map((item, key) => (
         <Pressable
-        onPress={() => navigation.navigate("Workout",{
-          image:item.image,
-          excersises:item.excersises,
-          id:item.id,
-        })}
+          onPress={() => {
+            storeSelectedFitnessId(item.id); // Store the clicked fitness data's ID
+            navigation.navigate("Workout", {
+              // Pass any other data you need to the WorkoutScreen
+            });
+          }}
           style={{ alignItems: "center", justifyContent: "center", margin: 10 }}
           key={key}
         >
@@ -36,7 +59,7 @@ const FitnessCards = () => {
             {item.name}
           </Text>
           <MaterialCommunityIcons
-            style={{ position: "absolute", color: "white", bottom: 15,left:20 }}
+            style={{ position: "absolute", color: "white", bottom: 15, left: 20 }}
             name="lightning-bolt"
             size={24}
             color="black"

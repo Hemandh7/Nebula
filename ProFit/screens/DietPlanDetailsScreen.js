@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import workoutAndDietPlans from '../data/diet'; // Import the data
+import { View, Text, StyleSheet, ScrollView,SafeAreaView } from 'react-native';
+import workoutAndDietPlans from '../data/diet';
 
 const DietPlanDetailsScreen = ({ route }) => {
-  const { dietPlanName } = route.params; // Get the selected diet plan name
+  const { dietPlanName } = route.params;
 
-  // Access the diet plan details based on the selected name
-  const selectedWorkoutPlan = 0; // Set to the appropriate workout plan index
+  const selectedWorkoutPlan = 0;
   const dietPlanDetails = workoutAndDietPlans[selectedWorkoutPlan].dietPlans[dietPlanName];
 
   return (
+   
     <ScrollView style={styles.container}>
       <Text style={styles.heading}>{dietPlanName} Details</Text>
       {Object.entries(dietPlanDetails).map(([meal, foods], index) => (
@@ -23,6 +23,7 @@ const DietPlanDetailsScreen = ({ route }) => {
         </View>
       ))}
     </ScrollView>
+   
   );
 };
 
@@ -30,10 +31,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#f5f5f5',
   },
   heading: {
     fontSize: 28,
+    marginTop:20,
     marginBottom: 20,
     fontWeight: 'bold',
     color: 'blue',
@@ -42,10 +44,14 @@ const styles = StyleSheet.create({
   mealContainer: {
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#ccc',
     borderRadius: 10,
     padding: 16,
     backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   mealHeading: {
     fontSize: 22,
@@ -55,7 +61,7 @@ const styles = StyleSheet.create({
   },
   foodItem: {
     fontSize: 18,
-    color: '#666',
+    color: '#555',
     marginBottom: 8,
   },
 });

@@ -41,7 +41,7 @@ const TrainerRegistrationScreen = () => {
       contact_number: contactNumber,
       password
     };
-    await fetch('http://127.0.0.1:8000/trainer/signup/', {
+    await fetch('https://fitgym-backend.onrender.com/trainer/signup/', {
           method: 'POST',
           headers: {
             // Accept: 'application/json',
@@ -58,7 +58,7 @@ const TrainerRegistrationScreen = () => {
           handleRedirect();
         })
         .catch((err) => alert(err));
-    
+    console.log(trainerProfile)
   };
 
   const handleRedirect = () => {
@@ -98,9 +98,9 @@ const TrainerRegistrationScreen = () => {
         required={true} // Add required attribute
       >
         <Picker.Item label="Select Gender" value="" />
-        <Picker.Item label="Male" value="Male" />
-        <Picker.Item label="Female" value="Female" />
-        <Picker.Item label="Other" value="Other" />
+        <Picker.Item label="Male" value="male" />
+        <Picker.Item label="Female" value="female" />
+        <Picker.Item label="Other" value="other" />
       </Picker>
       <TextInput
         style={styles.input}

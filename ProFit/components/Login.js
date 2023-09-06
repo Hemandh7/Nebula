@@ -20,7 +20,7 @@ const Login = () => {
     }
 
     
-    await fetch('api', {
+    await fetch('https://fitgym-backend.onrender.com/user/login/', {
       method: 'POST',
       headers: {
         // Accept: 'application/json',
@@ -37,10 +37,13 @@ const Login = () => {
     .then(async (data) => {
       const {message} = data;
       alert(message);
-      await AsyncStorage.setItem("loggedUID", data.account.id)
+      await AsyncStorage.setItem("loggedUID", String(data.account.id));
       await AsyncStorage.setItem("loggedRole", data.role)
       await AsyncStorage.setItem("loggedEmail", data.account.email)
       await AsyncStorage.setItem("loggedName", data.account.name)
+
+      setEmail('');
+      setPassword('');
       
       if (data.role === 'trainer') {
         navigation.navigate('Trainer'); // Replace with your actual trainer dashboard screen
@@ -121,12 +124,7 @@ const Login = () => {
         New Trainer Registration!
       </Text>
 
-      <Pressable  onPress={handleSkip}>
-        <Text style={styles.skipButtonText}>Continue as Guest</Text>
-      </Pressable>
-      <Pressable  onPress={handletrainer}>
-        <Text style={styles.skipButtonText}>Continue as Trainer</Text>
-      </Pressable>
+      
     </SafeAreaView>
   );
 };

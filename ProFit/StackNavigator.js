@@ -23,6 +23,7 @@ import NutritionPlanForm from "./components/NutritionPlanForm";
 import FoodItemsForm from "./components/FoodItemsForm";
 import TrainerSectionScreen from "./screens/TrainerSectionScreen";
 import TrainerRegistrationScreen from "./screens/TrainerRegistrationScreen";
+import LogoutScreen from "./screens/LogoutScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -51,6 +52,7 @@ const StackNavigator = () => {
         <Stack.Screen name="FoodItems" component={FoodItemsForm} options={{ headerShown: false }} />
         <Stack.Screen name="Trainer" component={TrainerSectionScreen} options={{ headerShown: false }} />
         <Stack.Screen name="TrainerRegistration" component={TrainerRegistrationScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Logout" component={LogoutScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -18,7 +18,7 @@ const NutritionPlanForm = ({ navigation }) => {
     // Function to fetch trainerId from AsyncStorage
     const fetchTrainerId = async () => {
       try {
-        const trainerId = await AsyncStorage.getItem('trainerId'); // Replace 'trainerId' with your actual storage key
+        const trainerId = await AsyncStorage.getItem('loggedUID'); // Replace 'trainerId' with your actual storage key
         if (trainerId !== null) {
           // Set the retrieved trainerId in the nutritionPlan state
           setNutritionPlan((prevNutritionPlan) => ({
@@ -46,7 +46,7 @@ const NutritionPlanForm = ({ navigation }) => {
   const handleSaveNutritionPlan = async () => {
     try {
       // Make a POST request to save the nutrition plan
-      const response = await axios.post('your-api-endpoint', nutritionPlan);
+      const response = await axios.post('https://fitgym-backend.onrender.com/create/nutrition/', nutritionPlan);
 
       // Handle the response (e.g., show a success message)
       console.log('Nutrition plan saved:', response.data);
@@ -63,7 +63,7 @@ const NutritionPlanForm = ({ navigation }) => {
       });
 
       // Navigate to another screen if needed
-      navigation.navigate('Home'); // Replace 'Home' with the target screen name
+      navigation.navigate('Nutrition'); // Replace 'Home' with the target screen name
     } catch (error) {
       // Handle errors (e.g., show an error message)
       console.error('Error saving nutrition plan:', error);

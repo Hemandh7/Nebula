@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, Image,ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image, ScrollView } from 'react-native';
 import { Picker } from "@react-native-picker/picker";
-import { useNavigation } from '@react-navigation/native'; // Import navigation hook
-import workoutAndDietPlans from '../data/diet'; // Import the data
+import { useNavigation } from '@react-navigation/native';
+import workoutAndDietPlans from '../data/diet';
 
 const DietScreen = () => {
   const [selectedWorkoutPlan, setSelectedWorkoutPlan] = useState(0);
-  const navigation = useNavigation(); // Initialize navigation
+  const navigation = useNavigation();
 
   const handleWorkoutPlanChange = (value) => {
     setSelectedWorkoutPlan(value);
@@ -15,7 +15,6 @@ const DietScreen = () => {
   const dietPlans = workoutAndDietPlans[selectedWorkoutPlan].dietPlans;
 
   const handleSeeMorePress = (dietPlanName) => {
-    // Navigate to DietPlanDetailsScreen with the selected diet plan name
     navigation.navigate('DietDetails', { dietPlanName });
   };
 
@@ -44,7 +43,7 @@ const DietScreen = () => {
           <Text style={styles.cardText}>Follow this plan strictly for results</Text>
           <Pressable
             style={styles.showMoreButton}
-            onPress={() => handleSeeMorePress(dietPlanName)} // Pass diet plan name
+            onPress={() => handleSeeMorePress(dietPlanName)}
           >
             <Text style={styles.buttonText}>See More</Text>
           </Pressable>
@@ -70,19 +69,27 @@ const styles = StyleSheet.create({
   picker: {
     backgroundColor: 'white',
     borderRadius: 8,
+    marginBottom: 20,
+    paddingHorizontal: 16,
   },
   dietPlanCard: {
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: '#ddd',
     marginBottom: 20,
-    borderRadius: 8,
+    borderRadius: 10,
     backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   cardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
   },
   cardHeading: {
     fontSize: 20,
@@ -92,7 +99,7 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 50,
     height: 50,
-    borderRadius: 20, // Makes it a rounded image
+    borderRadius: 20,
   },
   cardText: {
     padding: 16,
@@ -101,9 +108,9 @@ const styles = StyleSheet.create({
   showMoreButton: {
     backgroundColor: '#007BFF',
     alignItems: 'center',
-    padding: 10,
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
+    padding: 12,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
   buttonText: {
     color: 'white',

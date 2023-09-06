@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,13 +7,14 @@ import {
   Image,
   Pressable,
   ScrollView,
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FitnessItems } from "../Context";
 import FitnessCards from "../components/FitnessCards";
-import fitnessData from "../data/fitness";
 
 const HomeScreen = () => {
   const {
@@ -28,34 +29,53 @@ const HomeScreen = () => {
   } = useContext(FitnessItems);
   const navigation = useNavigation();
   const [isSaving, setIsSaving] = useState(false);
+  const [loggedUID, setLoggedUID] = useState(null); // State to hold the logged UID
+
+  // Fetch logged UID from AsyncStorage when the component mounts
+  useEffect(() => {
+    const fetchLoggedUID = async () => {
+      try {
+        const uid = await AsyncStorage.getItem("loggedUID");
+        if (uid !== null) {
+          setLoggedUID(uid);
+        }
+      } catch (error) {
+        console.error("Error fetching logged UID:", error);
+      }
+    };
+
+    fetchLoggedUID();
+  }, []); // Empty dependency array ensures this effect runs once on mount
 
   const handleSaveProgress = () => {
     setIsSaving(true);
 
     const dataToSave = {
+      loggedUID, // Include the logged UID
       workout,
       calories,
       minutes,
       completed,
     };
-    console.log(dataToSave);
+
     axios
-      .post("YOUR_SERVER_ENDPOINT_URL", dataToSave)
+      .post("https://fitgym-backend.onrender.com/activity/create/ ", dataToSave)
       .then((response) => {
         console.log("Progress saved successfully:", response.data);
         setIsSaving(false);
 
         // Reset the context values to 0 after saving
-        
+        setWorkout(0);
+        setCalories(0);
+        setMinutes(0);
+        setCompleted([]);
       })
       .catch((error) => {
         console.error("Error saving progress:", error);
         setIsSaving(false);
+        Alert.alert("Error", "Failed to save progress.");
       });
-      setWorkout(0);
-        setCalories(0);
-        setMinutes(0);
-        setCompleted([]);
+      console.log(dataToSave)
   };
 
   return (

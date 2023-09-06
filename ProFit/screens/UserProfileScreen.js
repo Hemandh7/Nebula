@@ -39,7 +39,7 @@ const UserProfileScreen = () => {
       contact_number: contactNumber,
       password
     };
-    await fetch('api', {
+    await fetch('https://fitgym-backend.onrender.com/user/signup/', {
           method: 'POST',
           headers: {
             // Accept: 'application/json',

@@ -17,7 +17,7 @@ const WorkoutForm = ({ navigation }) => {
     // Retrieve the trainerId from AsyncStorage and update the workoutPlan
     const fetchTrainerId = async () => {
       try {
-        const trainerId = await AsyncStorage.getItem('trainerId');
+        const trainerId = await AsyncStorage.getItem('loggedUID');
         if (trainerId) {
           setWorkoutPlan({ ...workoutPlan, trainerId });
         }
@@ -32,7 +32,7 @@ const WorkoutForm = ({ navigation }) => {
   const handleSaveWorkout = async () => {
     try {
       // Make a POST request to save the workout plan
-      const response = await axios.post('your-api-endpoint', workoutPlan);
+      const response = await axios.post('https://fitgym-backend.onrender.com/create/workout/', workoutPlan);
 
       // Handle the response (e.g., show a success message)
       console.log('Workout plan saved:', response.data);

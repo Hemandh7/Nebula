@@ -1,12 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, ScrollView, Button, StyleSheet } from 'react-native';
 import { Picker } from "@react-native-picker/picker";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const GoalScreen = ({ navigation }) => {
   const [planName, setPlanName] = useState('');
   const [selectedGoal, setSelectedGoal] = useState('Weight Loss');
   const [duration, setDuration] = useState('');
   const [description, setDescription] = useState('');
+  const [loggedUID, setLoggedUID] = useState('');
+
+  // Retrieve the loggedUID from AsyncStorage when the component mounts
+  useEffect(() => {
+    const fetchLoggedUID = async () => {
+      try {
+        const storedUID = await AsyncStorage.getItem('loggedUID');
+        if (storedUID !== null) {
+          setLoggedUID(storedUID);
+        }
+      } catch (error) {
+        console.error('Error fetching loggedUID from AsyncStorage:', error);
+      }
+    };
+
+    fetchLoggedUID();
+  }, []);
 
   const handleSaveGoal = async () => {
     // Prepare the goal data
@@ -15,11 +33,12 @@ const GoalScreen = ({ navigation }) => {
       selectedGoal,
       duration,
       description,
+      loggedUID, // Include loggedUID in the goal data
     };
   
     try {
       // Send a POST request to your API
-      const response = await fetch('YOUR_API_ENDPOINT_HERE', {
+      const response = await fetch('https://fitgym-backend.onrender.com/goal/create/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +53,7 @@ const GoalScreen = ({ navigation }) => {
         console.log('Goal saved successfully:', responseData);
         
         // After saving the goal, you can navigate back to the SectionScreen or any other screen.
-        navigation.goBack();
+        navigation.navigate('GoalList')
       } else {
         // Handle API error here
         console.error('Failed to save goal:', response.status);
@@ -92,6 +111,9 @@ const GoalScreen = ({ navigation }) => {
     </ScrollView>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   container: {

@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import axios from "axios";
 
-const NutritionCard = ({ route }) => {
-  const { nutritionItems } = route.params;
-
+const NutritionCard = () => {
+  const [foodItems, setFoodItems] = useState([]);
   const navigation = useNavigation();
+  const route = useRoute();
+  const selectedId = route.params.selectedId;
+
+  useEffect(() => {
+    // Make an Axios GET request to fetch food items data from your API or server
+    axios.get("https://fitgym-backend.onrender.com/all/food/")
+      .then((response) => {
+        // Assuming the response data is an array of food items
+        // Filter the data to include only items with matching nutritionId
+        const filteredItems = response.data.filter((item) => item.nutritionId === selectedId);
+        setFoodItems(filteredItems);
+      })
+      .catch((error) => {
+        console.error("Error fetching food items data:", error);
+      });
+  }, [selectedId]); // Fetch data whenever the selectedId changes
 
   return (
     <ScrollView style={styles.container}>
@@ -18,7 +34,7 @@ const NutritionCard = ({ route }) => {
         color="black"
       />
 
-      {nutritionItems.map((nutritionInfo, index) => (
+      {foodItems.map((nutritionInfo, index) => (
         <View key={index} style={styles.nutritionItemContainer}>
           <View style={styles.imageContainer}>
             <Image source={{ uri: nutritionInfo.image }} style={styles.nutritionImage} />
@@ -35,6 +51,9 @@ const NutritionCard = ({ route }) => {
     </ScrollView>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   container: {

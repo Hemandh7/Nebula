@@ -7,6 +7,8 @@ const TrainerSectionScreen = ({ navigation }) => {
       navigation.navigate("WorkoutForm");
     } else if (option === "nutritionform") {
       navigation.navigate("NutritionPlan");
+    }else if (option === "logout") {
+      navigation.navigate("Logout");
     }
   };
 
@@ -22,16 +24,22 @@ const TrainerSectionScreen = ({ navigation }) => {
       <View style={styles.cardContainer}>
         <Pressable onPress={() => handleSelectOption("woform")} style={styles.card}>
           <View style={styles.cardContent}>
-            <Text style={styles.cardText}>WorkoutForm</Text>
+            <Text style={styles.cardText}>Add Workout</Text>
             <Image source={require("../assets/download.jpeg")} style={styles.image} />
           </View>
         </Pressable>
         <Pressable onPress={() => handleSelectOption("nutritionform")} style={styles.card}>
           <View style={styles.cardContent}>
-            <Text style={styles.cardText}>NutritionForm</Text>
+            <Text style={styles.cardText}>Add Nutrition</Text>
             <Image source={require("../assets/download2.png")} style={styles.image} />
           </View>
         </Pressable>
+        <Pressable onPress={() => handleSelectOption("logout")} style={styles.card}>
+    <View style={styles.cardContent}>
+    <Text style={styles.cardText}>Logout</Text>
+      <Image source={require("../assets/logout.png")} style={styles.image} />
+      </View>
+  </Pressable>
       </View>
     </ScrollView>
   );
@@ -66,13 +74,14 @@ const styles = StyleSheet.create({
     borderRadius: 60, // Makes it a rounded image
   },
   cardText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
   },
   logoContainer: {
     alignItems: "center", // Center horizontally
     marginTop: 30,
-  },logo: {
+  },
+  logo: {
     width: 150,
     height: 150,
     borderRadius: 50,

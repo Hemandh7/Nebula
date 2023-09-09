@@ -19,23 +19,20 @@ const ActivityLogScreen = () => {
       .then((storedUID) => {
         if (storedUID !== null) {
           setLoggedUID(storedUID);
-          // Fetch progress data from the server when the component mounts
-          return axios.get(`https://fitgym-backend.onrender.com/all/activity?userId=${storedUID}`);
+          // Fetch all activity data from the server when the component mounts
+          return axios.get(`https://fitgym-backend.onrender.com/all/activity/`);
         }
       })
       .then((response) => {
         if (response) {
-          const logData = response.data.map((logItem) => ({
-            ...logItem,
-            completed: JSON.parse(logItem.completed),
-          }));
+          const logData = response.data.filter((logItem) => logItem.userId == loggedUID);
           setActivityLog(logData);
         }
       })
       .catch((error) => {
         console.error("Error fetching activity log:", error);
       });
-  }, []);
+  }, [loggedUID]);
 
   console.log(activityLog);
 

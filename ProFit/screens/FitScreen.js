@@ -55,12 +55,23 @@ const FitScreen = () => {
             style={{
               marginLeft: "auto",
               marginRight: "auto",
-              marginTop: 30,
-              fontSize: 38,
+              marginTop: 20,
+              fontSize: 30,
               fontWeight: "bold",
             }}
           >
-            x{current.sets}
+            Sets : x{current.sets} 
+          </Text>
+          <Text
+            style={{
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 20,
+              fontSize: 30,
+              fontWeight: "bold",
+            }}
+          >
+            Reps : x{current.reps} 
           </Text>
 
           {index + 1 >= exercises.length ? (

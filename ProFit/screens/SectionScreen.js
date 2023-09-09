@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   logoContainer: {
-    alignItems: "center", // Center horizontally
+    alignItems: "center",
     marginTop: 30,
   },
   title: {
@@ -87,31 +87,33 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   cardContainer: {
-    flexDirection: "column",
-    alignItems: "center",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
   },
   card: {
-    width: "100%",
-    maxWidth: 300,
-    margin: 10,
-    padding: 20,
+    width: "48%",
+    marginVertical: 10,
+    padding: 15, // Reduce padding to make more space for content
     backgroundColor: "#f0f0f0",
     borderRadius: 10,
+    alignItems: "center", // Center content vertically
   },
   cardContent: {
-    flexDirection: "row",
+    flexDirection: "column", // Display content in a column
     alignItems: "center",
-    justifyContent: "space-between",
   },
   image: {
-    width: 120,
-    height: 120,
-    marginRight: 10,
-    borderRadius: 60, // Makes it a rounded image
+    width: 80, // Reduce image size
+    height: 80, // Reduce image size
+    marginBottom: 10, // Add margin to separate image from text
+    borderRadius: 40, // Adjust border radius to make it circular
   },
   cardText: {
-    fontSize: 22,
+    fontSize: 18, // Reduce text font size
     fontWeight: "bold",
+    textAlign: "center", // Center text horizontally
   },
   logo: {
     width: 150,
@@ -121,5 +123,5 @@ const styles = StyleSheet.create({
   },
 });
 
-
 export default SectionScreen;
+

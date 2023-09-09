@@ -9,7 +9,7 @@ const DietPlanDetailsScreen = ({ route }) => {
   const dietPlanDetails = workoutAndDietPlans[selectedWorkoutPlan].dietPlans[dietPlanName];
 
   return (
-   
+    <SafeAreaView style={{ flex:1, marginTop: 50 }}>
     <ScrollView style={styles.container}>
       <Text style={styles.heading}>{dietPlanName} Details</Text>
       {Object.entries(dietPlanDetails).map(([meal, foods], index) => (
@@ -23,7 +23,7 @@ const DietPlanDetailsScreen = ({ route }) => {
         </View>
       ))}
     </ScrollView>
-   
+    </SafeAreaView>
   );
 };
 

@@ -65,6 +65,7 @@ const GoalScreen = ({ navigation }) => {
   };
 
   return (
+    <SafeAreaView style={{ flex:1, marginTop: 50 }}>
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Create a Workout Plan</Text>
       <View style={styles.form}>
@@ -109,6 +110,7 @@ const GoalScreen = ({ navigation }) => {
         <Button title="Save Goal" onPress={handleSaveGoal} />
       </View>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

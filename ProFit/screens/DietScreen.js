@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image, ScrollView, SafeAreaView } from 'react-native';
 import { Picker } from "@react-native-picker/picker";
 import { useNavigation } from '@react-navigation/native';
 import workoutAndDietPlans from '../data/diet';
@@ -19,6 +19,7 @@ const DietScreen = () => {
   };
 
   return (
+    <SafeAreaView style={{ flex:1, marginTop: 50 }}>
     <ScrollView style={styles.container}>
       <Text style={styles.heading}>Choose a Workout Plan</Text>
       <Picker
@@ -50,6 +51,7 @@ const DietScreen = () => {
         </View>
       ))}
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

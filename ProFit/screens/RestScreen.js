@@ -22,7 +22,7 @@ const RestScreen = () => {
     return () => clearTimeout(timer);
   });
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex:1, marginTop: 50 }}>
       <Image
         resizeMode="contain"
         source={{

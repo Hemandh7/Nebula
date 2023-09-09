@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Pressable, Image, Text, ScrollView } from "react-native";
+import { View, StyleSheet, Pressable, Image, Text, ScrollView,SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
@@ -26,6 +26,7 @@ const NutritionScreen = () => {
   };
 
   return (
+    <SafeAreaView style={{ flex:1, marginTop: 50 }}>
     <ScrollView style={styles.container}>
       <Ionicons
         onPress={() => navigation.goBack()}
@@ -46,6 +47,7 @@ const NutritionScreen = () => {
         </Pressable>
       ))}
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

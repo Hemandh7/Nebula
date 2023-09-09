@@ -1,26 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Pressable, Alert } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const GoalsListScreen = ({ navigation }) => {
   const [goals, setGoals] = useState([]);
   const [loggedUID, setLoggedUID] = useState('');
 
-  // Function to fetch goals from your API
-  async function fetchGoals() {
+  // Function to fetch goals from the API
+  const fetchGoals = async () => {
     try {
-      const response = await fetch('https://fitgym-backend.onrender.com/all/goal/');
-      if (response.ok) {
-        const data = await response.json();
-        setGoals(data);
-      } else {
-        console.error('Failed to fetch goals:', response.status);
+      // Fetch the loggedUID from AsyncStorage
+      const storedUID = await AsyncStorage.getItem('loggedUID');
+      if (storedUID !== null) {
+        setLoggedUID(storedUID);
+
+        // Fetch all goals from the API
+        const response = await fetch('https://fitgym-backend.onrender.com/all/goal/');
+        if (response.ok) {
+          const data = await response.json();
+          // Filter goals that match the loggedUID
+          const filteredGoals = data.filter((goal) => goal.userId == storedUID);
+          setGoals(filteredGoals);
+        } else {
+          console.error('Failed to fetch goals:', response.status);
+        }
       }
     } catch (error) {
       console.error('Error fetching goals:', error);
     }
-  }
+  };
 
   // Fetch goals when the component mounts
   useEffect(() => {
@@ -28,60 +36,27 @@ const GoalsListScreen = ({ navigation }) => {
   }, []);
 
   // Reload goals when the screen gains focus
-  useFocusEffect(
-    React.useCallback(() => {
-      fetchGoals();
-    }, [])
-  );
-
-  // Retrieve the loggedUID from AsyncStorage when the component mounts
   useEffect(() => {
-    AsyncStorage.getItem('loggedUID')
-      .then((storedUID) => {
-        if (storedUID !== null) {
-          setLoggedUID(storedUID);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching loggedUID from AsyncStorage:', error);
-      });
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      fetchGoals();
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   const handleMarkAsCompleted = async (goalId, isCompleted) => {
+    // Implement the logic to mark a goal as completed here
     try {
-      const response = await fetch('https://fitgym-backend.onrender.com/goal/update/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          goalId,
-          userId: loggedUID,
-        }),
-      });
-
-      if (response.ok) {
-        // Goal marked as completed successfully
-        // You can handle the response from the API if needed
-        console.log('Goal marked as completed successfully');
-        // Update the local state to reflect the change
-        setGoals((prevGoals) =>
-          prevGoals.map((goal) =>
-            goal.id === goalId ? { ...goal, completed: !isCompleted } : goal
-          )
-        );
-        // Show an alert indicating success
-        Alert.alert('Success', 'Goal status updated successfully.');
-      } else {
-        // Handle API error here
-        console.error('Failed to mark goal as completed:', response.status);
-        // Show an alert indicating failure
-        Alert.alert('Error', 'Failed to update goal status.');
-      }
+      // Send a request to update the goal's status
+      // ...
+      // After successfully updating the goal, update the local state
+      const updatedGoals = goals.map((goal) =>
+        goal.id === goalId ? { ...goal, completed: !isCompleted } : goal
+      );
+      setGoals(updatedGoals);
+      Alert.alert('Success', 'Goal status updated successfully.');
     } catch (error) {
       console.error('Error marking goal as completed:', error);
-      // Show an alert for any other errors
-      Alert.alert('Error', 'An error occurred while updating goal status.');
+      Alert.alert('Error', 'Failed to update goal status.');
     }
   };
 
@@ -129,8 +104,6 @@ const GoalsListScreen = ({ navigation }) => {
     </View>
   );
 };
-
-
 
 const styles = StyleSheet.create({
   container: {

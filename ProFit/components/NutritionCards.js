@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView,SafeAreaView} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import axios from "axios";
@@ -25,6 +25,7 @@ const NutritionCard = () => {
   }, [selectedId]); // Fetch data whenever the selectedId changes
 
   return (
+    <SafeAreaView style={{ flex:1, marginTop: 50 }}>
     <ScrollView style={styles.container}>
       <Ionicons
         onPress={() => navigation.goBack()}
@@ -49,6 +50,7 @@ const NutritionCard = () => {
         </View>
       ))}
     </ScrollView>
+    </SafeAreaView >
   );
 };
 
@@ -60,6 +62,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: "#f5f5f5", // Background color
+   
   },
   backIcon: {
     position: "absolute",

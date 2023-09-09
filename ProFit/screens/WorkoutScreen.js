@@ -45,7 +45,7 @@ const WorkOutScreen = () => {
     <>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{ backgroundColor: "white", marginTop: 50 }}
+        style={{ backgroundColor: "white", marginTop: 50}}
       >
         {/* <Image
           style={{ width: "100%", height: 170 }}

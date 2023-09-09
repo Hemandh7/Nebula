@@ -79,9 +79,8 @@ const HomeScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView>
-        <Ionicons
+    <SafeAreaView style={{ flex: 1, marginTop:50}}>
+      <Ionicons
           onPress={() => navigation.goBack()}
           style={{ position: "absolute", top: 40, left: 40 }}
           name="arrow-back-outline"
@@ -157,7 +156,7 @@ const HomeScreen = () => {
               </Text>
             </View>
           </View>
-
+           
           <Pressable
             style={{
               backgroundColor: isSaving ? "gray" : "green",
@@ -173,7 +172,7 @@ const HomeScreen = () => {
             </Text>
           </Pressable>
         </View>
-
+        <ScrollView>   
         <FitnessCards />
       </ScrollView>
     </SafeAreaView>

@@ -2,14 +2,16 @@
 
 FitGym is a comprehensive Fitness and tracking mobile application developed using React Native. It empowers users to track their fitness goals, connect with fitness trainers, and access personalized workout and nutrition plans.
 
-![FitGym Logo](link_to_your_logo_image)
+![FitGym Logo](![logo2](https://github.com/Hemandh7/Nebula/assets/112857752/18a61c08-b196-437a-990d-e1fd19f9a315)
+)
 
 
 ![FitGym Logo](link_to_your_logo_image)
 
-![Project Screenshot 1](link_to_image_1)
-![Project Screenshot 2](link_to_image_2)
-![Project Screenshot 3](link_to_image_3)
+![Project Screenshot 1](![proj1](https://github.com/Hemandh7/Nebula/assets/112857752/5405ce82-54bf-4608-8f84-b89e05651d09)
+)
+![Project Screenshot 2](![proj2](https://github.com/Hemandh7/Nebula/assets/112857752/70f3a6ed-f67e-4262-ace1-7edcbdef1609)
+)
 
 ## Entities
 ### User
@@ -63,7 +65,7 @@ Backend API will be accessible at `https://fitgym-backend.onrender.com`.
 You can use these API endpoints to interact with the FitGym backend.
 
 ## Deployment
-- [Frontend Deployment](Link to Deployed Frontend)
+- [Frontend Deployment](https://drive.google.com/file/d/1jc0sBqlSflhrwSeTaRCce73JaQujWGkZ/view?usp=sharing)
 - [Backend Deployment](https://fitgym-backend.onrender.com)
 
 

@@ -2,15 +2,15 @@
 
 FitGym is a comprehensive Fitness and tracking mobile application developed using React Native. It empowers users to track their fitness goals, connect with fitness trainers, and access personalized workout and nutrition plans.
 
-![FitGym Logo](![logo2](https://github.com/Hemandh7/Nebula/assets/112857752/18a61c08-b196-437a-990d-e1fd19f9a315)
+![FitGym Logo](https://github.com/Hemandh7/Nebula/assets/112857752/18a61c08-b196-437a-990d-e1fd19f9a315)
 )
 
 
-![FitGym Logo](link_to_your_logo_image)
 
-![Project Screenshot 1](![proj1](https://github.com/Hemandh7/Nebula/assets/112857752/5405ce82-54bf-4608-8f84-b89e05651d09)
+
+![Project Screenshot 1](https://github.com/Hemandh7/Nebula/assets/112857752/5405ce82-54bf-4608-8f84-b89e05651d09)
 )
-![Project Screenshot 2](![proj2](https://github.com/Hemandh7/Nebula/assets/112857752/70f3a6ed-f67e-4262-ace1-7edcbdef1609)
+![Project Screenshot 2](https://github.com/Hemandh7/Nebula/assets/112857752/70f3a6ed-f67e-4262-ace1-7edcbdef1609)
 )
 
 ## Entities

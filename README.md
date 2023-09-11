@@ -1,6 +1,6 @@
-# FitGym 🏋️‍♂️🥗
+# ProFit 🏋️‍♂️🥗
 
-FitGym is a comprehensive Fitness and tracking mobile application developed using React Native. It empowers users to track their fitness goals, connect with fitness trainers, and access personalized workout and nutrition plans.
+ProFit is a comprehensive Fitness and tracking mobile application developed using React Native. It empowers users to track their fitness goals, connect with fitness trainers, and access personalized workout and nutrition plans.
 
 ![FitGym Logo](https://github.com/Hemandh7/Nebula/assets/112857752/18a61c08-b196-437a-990d-e1fd19f9a315)
 )
